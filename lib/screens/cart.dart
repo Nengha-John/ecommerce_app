@@ -1,7 +1,5 @@
 import 'package:ecommerce_app/controllers/products.controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
 
 class Cart extends StatefulWidget {
@@ -20,8 +18,8 @@ class _CartState extends State<Cart> {
           body: Column(
         children: [
           Container(
-            padding: EdgeInsets.all(12),
-            margin: EdgeInsets.symmetric(vertical: 12),
+            padding: const EdgeInsets.all(12),
+            margin: const EdgeInsets.symmetric(vertical: 12),
             width: MediaQuery.of(context).size.width,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,24 +43,22 @@ class _CartState extends State<Cart> {
           Expanded(
               child: ListView.builder(
                   itemCount: provider.cartProducts.length,
-                  itemBuilder: (context, index) => Container(
-                        child: ListTile(
-                          leading: Image.network(
-                            provider.cartProducts[index].image,
-                            fit: BoxFit.cover,
-                            width: 90,
-                            height: 90,
-                          ),
-                          title: Text(
-                            provider.cartProducts[index].name,
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                            overflow: TextOverflow.visible,
-                          ),
-                          subtitle: Text(
-                            'Tsh.${provider.cartProducts[index].price}',
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                            overflow: TextOverflow.visible,
-                          ),
+                  itemBuilder: (context, index) => ListTile(
+                        leading: Image.network(
+                          provider.cartProducts[index].image,
+                          fit: BoxFit.cover,
+                          width: 90,
+                          height: 90,
+                        ),
+                        title: Text(
+                          provider.cartProducts[index].name,
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                          overflow: TextOverflow.visible,
+                        ),
+                        subtitle: Text(
+                          'Tsh.${provider.cartProducts[index].price}',
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                          overflow: TextOverflow.visible,
                         ),
                       )))
         ],

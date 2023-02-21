@@ -17,12 +17,6 @@ class Product {
       required this.ratings});
 
   static Product fromJson(Map data) {
-    print('Input data $data');
-    try {
-      num test = data['rating']['rate'];
-    } on Error catch (e) {
-      print(e);
-    }
     double price = data['price'].runtimeType == int
         ? data['price'].toDouble()
         : data['price'];

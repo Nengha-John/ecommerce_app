@@ -13,6 +13,8 @@ class ProductList extends StatefulWidget {
 }
 
 class _ProductListState extends State<ProductList> {
+  //  Displays the product grid in first tab of the bottom navigation
+
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ProductProvider>(context);

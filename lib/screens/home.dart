@@ -2,8 +2,6 @@ import 'package:ecommerce_app/controllers/products.controller.dart';
 import 'package:ecommerce_app/screens/cart.dart';
 import 'package:ecommerce_app/screens/product.list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
@@ -14,15 +12,17 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  //  Displays the home page with bottom navigations
+
   int currentPage = 0;
-  List<Widget> pages = [ProductList(), Cart()];
+  List<Widget> pages = [const ProductList(), const Cart()];
+
   @override
   Widget build(BuildContext context) {
+    // Define a Global Provider that is used to manage state down the
+    // Widget tree
     return ChangeNotifierProvider<ProductProvider>(
-        create: (context) {
-          final productsProvider = ProductProvider();
-          return productsProvider;
-        },
+        create: (context) => ProductProvider(),
         child: Scaffold(
           body: pages[currentPage],
           bottomNavigationBar: BottomNavigationBar(

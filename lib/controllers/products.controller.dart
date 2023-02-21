@@ -5,15 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart' as dio;
 
 class ProductProvider extends ChangeNotifier {
-  List<Product> products = [];
-  List<Product> cartProducts = [];
-  List<Product> displayProducts = [];
-  double totalCost = 0;
+  List<Product> products = []; // A list of all products available
+  List<Product> cartProducts = []; // Products added to cart
+  List<Product> displayProducts =
+      []; // Products that are displayed and manipulated
+  double totalCost = 0; // Total Cost of products in cart
   String searchTerm = '';
   bool isPriceAscending = true;
   bool isRatingAscending = true;
 
-  addToCart(Product product) {
+  void addToCart(Product product) {
     if (cartProducts.where((element) => element.id == product.id).isEmpty) {
       cartProducts.add(product);
       totalCost += product.price;
@@ -21,21 +22,10 @@ class ProductProvider extends ChangeNotifier {
     }
   }
 
-  double get cost {
-    double cst = 0.0;
-    for (Product product in cartProducts) {
-      cst += product.price;
-    }
-    notifyListeners();
-    return cst;
-  }
-
   void searchProduct(String? term) {
     if (term!.isEmpty) {
-      // setState(() {
       displayProducts = products;
       searchTerm = '';
-      // });
     }
     displayProducts = products.where((item) {
       return item.name.toLowerCase().contains(term.toLowerCase());
@@ -46,7 +36,6 @@ class ProductProvider extends ChangeNotifier {
 
   void sortByPrice() {
     displayProducts = products;
-    print(!isPriceAscending);
     isPriceAscending = !isPriceAscending;
     if (isPriceAscending) {
       displayProducts.sort((a, b) => a.price.compareTo(b.price));
@@ -57,7 +46,6 @@ class ProductProvider extends ChangeNotifier {
   }
 
   void sortByRatings() {
-    print('By Ratings ');
     isRatingAscending = !isRatingAscending;
     displayProducts = products;
     if (isRatingAscending) {
@@ -72,7 +60,6 @@ class ProductProvider extends ChangeNotifier {
     if (products.isNotEmpty) {
       return;
     }
-    print('Getting products');
     dio.Response response =
         await Client().get(ApiConfig.BASE_API_URL, null, null);
     var respData = response.data;
